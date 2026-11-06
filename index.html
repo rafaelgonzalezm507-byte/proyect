@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Módulo 4 – Diseño de investigación cuantitativa: planteamiento, cronograma Gantt 52 semanas y presupuesto. Tema: phishing en estudiantes universitarios de Panamá. Rafael González – Ciberseguridad.">
+<meta name="color-scheme" content="light dark">
+<meta name="author" content="Rafael González">
+<title>Módulo 4: Diseño de Investigación Cuantitativa | Rafael González</title>
+
+<script>
+(function () {
+  var t = null;
+  try { t = localStorage.getItem('m4-theme'); } catch (e) {}
+  if (t !== 'light' && t !== 'dark') {
+    t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+  }
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #f4f6f9;
+  --surface: #ffffff;
+  --surface2: #eef2f7;
+  --text: #1a2332;
+  --muted: #5a6a7a;
+  --primary: #1f4e79;
+  --primary-light: #2e75b6;
+  --accent: #0d9488;
+  --accent2: #f59e0b;
+  --whatsapp: #25d366;
+  --plan: #2e75b6;
+  --design: #70ad47;
+  --field: #ed7d31;
+  --analysis: #7030a0;
+  --close: #c00000;
+  --border: #d0d7de;
+  --shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
+  --radius: 12px;
+  --nav-w: 280px;
+  --header-h: 64px;
+}
+[data-theme="dark"] {
+  --bg: #0f1419;
+  --surface: #1a2332;
+  --surface2: #243044;
+  --text: #e8eef5;
+  --muted: #94a3b8;
+  --primary: #5b9bd5;
+  --primary-light: #7eb6e0;
+  --accent: #2dd4bf;
+  --border: #334155;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { color: var(--primary-light); text-decoration: none; }
+a:hover { text-decoration: underline; }
+img { max-width: 100%; height: auto; display: block; border-radius: 10px; }
+
+/* HEADER */
+.header {
+  position: fixed; top: 0; left: 0; right: 0; height: var(--header-h);
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 1.25rem; z-index: 100; box-shadow: var(--shadow);
+}
+.header-brand { display: flex; align-items: center; gap: .75rem; font-weight: 700; font-size: 1.05rem; color: var(--primary); }
+.header-brand span { color: var(--muted); font-weight: 500; font-size: .85rem; }
+.header-actions { display: flex; align-items: center; gap: .5rem; }
+.btn-icon {
+  width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--border);
+  background: var(--surface2); color: var(--text); cursor: pointer;
+  display: grid; place-items: center; transition: .2s; font-size: 1.1rem;
+}
+.btn-icon:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+.btn-wa {
+  background: var(--whatsapp) !important; color: #fff !important; border-color: var(--whatsapp) !important;
+  width: auto; padding: 0 .9rem; font-size: .85rem; font-weight: 600; gap: .4rem;
+  display: inline-flex; align-items: center;
+}
+.btn-wa:hover { filter: brightness(1.08); }
+.menu-btn { display: none; }
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed; top: var(--header-h); left: 0; bottom: 0; width: var(--nav-w);
+  background: var(--surface); border-right: 1px solid var(--border);
+  overflow-y: auto; padding: 1.25rem 0; z-index: 90; transition: transform .3s ease;
+}
+.sidebar-nav a {
+  display: flex; align-items: center; gap: .65rem;
+  padding: .65rem 1.25rem; color: var(--muted); font-size: .9rem; font-weight: 500;
+  border-left: 3px solid transparent; transition: .15s;
+}
+.sidebar-nav a:hover, .sidebar-nav a.active {
+  color: var(--primary); background: var(--surface2); border-left-color: var(--primary); text-decoration: none;
+}
+.sidebar-nav .nav-section {
+  padding: 1rem 1.25rem .35rem; font-size: .7rem; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--muted); font-weight: 600;
+}
+.sidebar-contact {
+  margin: 1.5rem 1.25rem; padding: 1rem; background: var(--surface2);
+  border-radius: 10px; border: 1px solid var(--border); font-size: .82rem;
+}
+.sidebar-contact a { display: flex; align-items: center; gap: .5rem; margin-top: .45rem; font-weight: 600; }
+.backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 80; }
+
+/* MAIN */
+.main { margin-left: var(--nav-w); margin-top: var(--header-h); min-height: calc(100vh - var(--header-h)); }
+.container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+/* HERO */
+.hero {
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #0f2a4a 0%, #1f4e79 45%, #0d9488 100%);
+  color: #fff; padding: 3.5rem 1.5rem 4rem; text-align: center;
+}
+.hero-canvas { position: absolute; inset: 0; opacity: .35; pointer-events: none; }
+.hero-content { position: relative; z-index: 2; max-width: 820px; margin: 0 auto; }
+.hero-badge {
+  display: inline-block; background: rgba(255,255,255,.15); backdrop-filter: blur(8px);
+  padding: .35rem 1rem; border-radius: 999px; font-size: .8rem; font-weight: 600;
+  margin-bottom: 1rem; border: 1px solid rgba(255,255,255,.25);
+}
+.hero h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 800; line-height: 1.2; margin-bottom: .75rem; }
+.hero p { font-size: 1.05rem; opacity: .92; max-width: 640px; margin: 0 auto 1.5rem; }
+.hero-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; }
+.hero-chip {
+  background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+  padding: .4rem .9rem; border-radius: 8px; font-size: .85rem; font-weight: 500;
+}
+
+/* SECTIONS */
+section { scroll-margin-top: calc(var(--header-h) + 1rem); margin-bottom: 3rem; }
+.section-title {
+  font-size: 1.45rem; font-weight: 700; color: var(--primary); margin-bottom: 1rem;
+  display: flex; align-items: center; gap: .6rem;
+}
+.section-title::before {
+  content: ''; width: 4px; height: 1.3em; background: var(--accent); border-radius: 2px;
+}
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1.5rem; box-shadow: var(--shadow); margin-bottom: 1.25rem;
+}
+.card h3 { font-size: 1.05rem; font-weight: 650; color: var(--primary); margin-bottom: .6rem; }
+.card p, .card li { color: var(--muted); font-size: .95rem; }
+.card ul { padding-left: 1.2rem; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+@media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+
+.tag-3d {
+  display: inline-flex; align-items: center; gap: .35rem;
+  padding: .3rem .7rem; border-radius: 6px; font-size: .78rem; font-weight: 600;
+  background: var(--surface2); color: var(--primary); border: 1px solid var(--border);
+  box-shadow: 0 2px 0 var(--border), 0 3px 6px rgba(0,0,0,.06);
+  transform: translateY(0); transition: transform .15s, box-shadow .15s;
+}
+.tag-3d:hover { transform: translateY(-2px); box-shadow: 0 4px 0 var(--border), 0 6px 12px rgba(0,0,0,.1); }
+.tag-plan { background: #d6e8f7; color: #1f4e79; border-color: #a8c8e8; }
+
+/* IMAGE CARDS */
+.img-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; box-shadow: var(--shadow); margin-bottom: 1.5rem;
+}
+.img-card img { width: 100%; border-radius: 0; }
+.img-card .caption {
+  padding: 1rem 1.25rem; font-size: .9rem; color: var(--muted);
+  border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .5rem;
+}
+.img-card .caption a { font-weight: 600; }
+
+/* GANTT table */
+.gantt-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); }
+.gantt-table { border-collapse: collapse; min-width: 1100px; width: 100%; font-size: .78rem; }
+.gantt-table th, .gantt-table td { border: 1px solid var(--border); padding: .35rem .4rem; text-align: center; }
+.gantt-table th.task { text-align: left; min-width: 280px; background: var(--primary); color: #fff; position: sticky; left: 0; z-index: 2; }
+.gantt-table th.wk { width: 18px; font-size: .65rem; background: var(--primary-light); color: #fff; }
+.gantt-table th.q { background: #0d3b66; }
+.gantt-table td.task { text-align: left; font-weight: 500; background: var(--surface); position: sticky; left: 0; z-index: 1; min-width: 280px; }
+.gantt-table .bar { height: 18px; border-radius: 4px; margin: 0 auto; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+.bar-plan { background: var(--plan); }
+.bar-design { background: var(--design); }
+.bar-field { background: var(--field); }
+.bar-analysis { background: var(--analysis); }
+.bar-close { background: var(--close); }
+.gantt-legend { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1rem; }
+.gantt-legend span { display: inline-flex; align-items: center; gap: .4rem; font-size: .82rem; color: var(--muted); }
+.gantt-legend i { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
+
+.metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin: 1.25rem 0; }
+.metric {
+  background: var(--surface2); border-radius: 10px; padding: 1rem; text-align: center;
+  border: 1px solid var(--border);
+}
+.metric b { display: block; font-size: 1.35rem; color: var(--primary); font-weight: 700; }
+.metric span { font-size: .8rem; color: var(--muted); }
+
+/* BUDGET */
+.budget-table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.budget-table th { background: var(--primary); color: #fff; padding: .6rem .75rem; text-align: left; }
+.budget-table td { padding: .5rem .75rem; border-bottom: 1px solid var(--border); }
+.budget-table .grp { background: var(--primary-light); color: #fff; font-weight: 600; }
+.budget-table .sub { background: var(--surface2); font-weight: 600; }
+.budget-table .total { background: var(--primary); color: #fff; font-weight: 700; font-size: 1.05rem; }
+.budget-table .num { text-align: right; font-variant-numeric: tabular-nums; font-family: 'JetBrains Mono', monospace; }
+.share-bars { margin-top: 1.25rem; }
+.bar-row { margin-bottom: .7rem; }
+.bar-label { display: flex; justify-content: space-between; font-size: .82rem; margin-bottom: .25rem; color: var(--muted); }
+.bar-bg { height: 10px; background: var(--surface2); border-radius: 5px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 5px; width: 0; transition: width 1s ease; }
+
+/* FAQ */
+.faq-item { border: 1px solid var(--border); border-radius: 10px; margin-bottom: .6rem; overflow: hidden; background: var(--surface); }
+.faq-q {
+  width: 100%; text-align: left; padding: 1rem 1.15rem; background: transparent; border: none;
+  font-family: inherit; font-size: .95rem; font-weight: 600; color: var(--text); cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.faq-q::after { content: '+'; font-size: 1.3rem; color: var(--primary); }
+.faq-item.open .faq-q::after { content: '−'; }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; padding: 0 1.15rem; color: var(--muted); font-size: .9rem; }
+.faq-item.open .faq-a { max-height: 400px; padding-bottom: 1rem; }
+
+/* DOWNLOAD BOX */
+.download-box {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin: 1.5rem 0;
+}
+.dl-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  padding: 1.25rem; text-align: center; transition: .2s; box-shadow: var(--shadow);
+}
+.dl-card:hover { border-color: var(--primary); transform: translateY(-3px); }
+.dl-card .icon { font-size: 2rem; margin-bottom: .5rem; }
+.dl-card h4 { font-size: .95rem; margin-bottom: .35rem; color: var(--primary); }
+.dl-card p { font-size: .8rem; color: var(--muted); margin-bottom: .75rem; }
+.dl-card a.btn {
+  display: inline-block; background: var(--primary); color: #fff; padding: .5rem 1rem;
+  border-radius: 8px; font-size: .85rem; font-weight: 600; text-decoration: none;
+}
+.dl-card a.btn:hover { background: var(--primary-light); }
+
+/* FOOTER */
+.footer {
+  background: linear-gradient(180deg, var(--surface) 0%, var(--surface2) 100%);
+  border-top: 1px solid var(--border);
+  padding: 3rem 1.5rem 2rem; margin-left: var(--nav-w); color: var(--muted); font-size: .9rem;
+}
+.footer-grid {
+  max-width: 1100px; margin: 0 auto; display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem;
+}
+.footer h4 { color: var(--primary); font-size: 1rem; margin-bottom: .75rem; font-weight: 700; }
+.footer ul { list-style: none; }
+.footer li { margin-bottom: .4rem; }
+.footer a { color: var(--muted); }
+.footer a:hover { color: var(--primary-light); }
+.footer-bottom {
+  max-width: 1100px; margin: 2rem auto 0; padding-top: 1.5rem;
+  border-top: 1px solid var(--border); text-align: center; font-size: .8rem;
+}
+.footer-social { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: .75rem; }
+.footer-social a {
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .45rem .9rem; border-radius: 8px; font-weight: 600; font-size: .85rem;
+  border: 1px solid var(--border); background: var(--surface); color: var(--text); text-decoration: none;
+}
+.footer-social a:hover { border-color: var(--primary); color: var(--primary); }
+.footer-social a.wa { background: var(--whatsapp); color: #fff; border-color: var(--whatsapp); }
+.footer-social a.wa:hover { filter: brightness(1.1); color: #fff; }
+
+/* 3D */
+#three-container {
+  position: fixed; bottom: 90px; right: 20px; width: 140px; height: 140px;
+  border-radius: 16px; overflow: hidden; z-index: 50;
+  box-shadow: var(--shadow); border: 1px solid var(--border); background: var(--surface);
+  opacity: .9; transition: opacity .3s;
+}
+#three-container:hover { opacity: 1; }
+#three-container canvas { display: block; width: 100% !important; height: 100% !important; }
+
+/* CHATBOT */
+.chat-fab {
+  position: fixed; bottom: 20px; right: 20px; width: 56px; height: 56px;
+  border-radius: 50%; background: var(--primary); color: #fff; border: none;
+  font-size: 1.5rem; cursor: pointer; z-index: 60; box-shadow: 0 4px 20px rgba(31,78,121,.4);
+  display: grid; place-items: center; transition: .2s;
+}
+.chat-fab:hover { transform: scale(1.08); }
+.chat {
+  position: fixed; bottom: 90px; right: 20px; width: 340px; max-width: calc(100vw - 40px);
+  height: 420px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; box-shadow: var(--shadow); z-index: 70;
+  display: flex; flex-direction: column; overflow: hidden;
+  transform: scale(0.9); opacity: 0; pointer-events: none; transition: .25s;
+}
+.chat.open { transform: scale(1); opacity: 1; pointer-events: auto; }
+.chat-header {
+  background: var(--primary); color: #fff; padding: .85rem 1rem;
+  display: flex; justify-content: space-between; align-items: center; font-weight: 600;
+}
+.chat-header button { background: transparent; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; }
+.chat-body { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: .6rem; }
+.msg { max-width: 85%; padding: .6rem .85rem; border-radius: 12px; font-size: .88rem; line-height: 1.45; }
+.msg.bot { background: var(--surface2); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; }
+.msg.user { background: var(--primary); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+.chat-chips { display: flex; flex-wrap: wrap; gap: .4rem; padding: 0 .75rem .5rem; }
+.chip {
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 999px;
+  padding: .3rem .7rem; font-size: .75rem; cursor: pointer; color: var(--muted);
+}
+.chip:hover { border-color: var(--primary); color: var(--primary); }
+.chat-form { display: flex; border-top: 1px solid var(--border); padding: .5rem; gap: .4rem; }
+.chat-form input {
+  flex: 1; border: 1px solid var(--border); border-radius: 8px; padding: .55rem .75rem;
+  font-family: inherit; font-size: .88rem; background: var(--bg); color: var(--text);
+}
+.chat-form button {
+  background: var(--primary); color: #fff; border: none; border-radius: 8px;
+  padding: 0 .9rem; cursor: pointer; font-weight: 600;
+}
+
+#progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); z-index: 200; width: 0; }
+
+@media (max-width: 992px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main, .footer { margin-left: 0; }
+  .menu-btn { display: grid; }
+  .backdrop.show { display: block; }
+  #three-container { width: 100px; height: 100px; bottom: 80px; right: 12px; }
+  .chat { bottom: 80px; right: 12px; }
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<!-- HEADER -->
+<header class="header" role="banner">
+  <div class="header-brand">
+    <button class="btn-icon menu-btn" id="menu-btn" aria-label="Menú" aria-expanded="false">☰</button>
+    <div>
+      Módulo 4 · Cuantitativo
+      <span>Rafael González · Ciberseguridad</span>
+    </div>
+  </div>
+  <div class="header-actions">
+    <a class="btn-icon btn-wa" href="https://wa.me/50767600882" target="_blank" rel="noopener" title="WhatsApp">
+      ✆ 6760-0882
+    </a>
+    <button class="btn-icon" id="theme-btn" aria-label="Cambiar tema" title="Tema claro/oscuro">◐</button>
+    <button class="btn-icon" id="print-btn" aria-label="Imprimir / PDF" title="Imprimir">🖨</button>
+  </div>
+</header>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar" role="navigation" aria-label="Navegación principal">
+  <nav class="sidebar-nav">
+    <div class="nav-section">Contenido</div>
+    <a href="#hero" class="active">Inicio</a>
+    <a href="#planteamiento">Planteamiento del problema</a>
+    <a href="#diseno">Diseño metodológico</a>
+    <a href="#gantt">Cronograma Gantt</a>
+    <a href="#presupuesto">Presupuesto</a>
+    <a href="#descargas">Descargas</a>
+    <a href="#faq">Preguntas frecuentes</a>
+    <div class="nav-section">Enlaces</div>
+    <a href="https://docs.google.com/spreadsheets/d/11aC0pZ65_r8KcZYeLiyfFb6S6xtN34QS/edit?usp=drive_link&ouid=106644594007973404773&rtpof=true&sd=true" target="_blank" rel="noopener">Excel (Google Drive)</a>
+    <a href="https://github.com/rafaelgonzalezm507-byte/portafolio" target="_blank" rel="noopener">GitHub · Portafolio</a>
+    <a href="https://wa.me/50767600882" target="_blank" rel="noopener">WhatsApp · 6760-0882</a>
+  </nav>
+  <div class="sidebar-contact">
+    <strong>Contacto rápido</strong>
+    <a href="https://wa.me/50767600882" target="_blank" rel="noopener">✆ +507 6760-0882</a>
+    <a href="https://github.com/rafaelgonzalezm507-byte/portafolio" target="_blank" rel="noopener">🐙 GitHub</a>
+  </div>
+</aside>
+<div class="backdrop" id="backdrop"></div>
+
+<!-- MAIN -->
+<main class="main" role="main">
+
+  <section class="hero" id="hero">
+    <canvas class="hero-canvas" id="hero-canvas"></canvas>
+    <div class="hero-content">
+      <div class="hero-badge">Módulo 4 · Actividad 1 · Investigación cuantitativa</div>
+      <h1>Diseño de Investigación Cuantitativa</h1>
+      <p>Planteamiento afinado, cronograma Gantt de 52 semanas y presupuesto detallado para el estudio de conocimiento y prácticas de prevención del phishing en estudiantes universitarios de la ciudad de Panamá.</p>
+      <div class="hero-meta">
+        <span class="hero-chip">Rafael González</span>
+        <span class="hero-chip">Licenciatura en Ciberseguridad</span>
+        <span class="hero-chip">Descriptivo-correlacional</span>
+        <span class="hero-chip">52 semanas</span>
+        <span class="hero-chip">Total B/. 4.550,70</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+
+    <!-- PLANTEAMIENTO -->
+    <section id="planteamiento">
+      <h2 class="section-title">Planteamiento del problema cuantitativo</h2>
+      <div class="card">
+        <h3>Objeto de estudio</h3>
+        <p>Conocimiento y prácticas de prevención frente a los ataques de phishing entre estudiantes universitarios de la ciudad de Panamá.</p>
+        <div style="margin-top:.75rem; display:flex; flex-wrap:wrap; gap:.5rem;">
+          <span class="tag-3d tag-plan">Descriptivo-correlacional</span>
+          <span class="tag-3d tag-plan">No experimental</span>
+          <span class="tag-3d tag-plan">Transversal</span>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Objetivo general</h3>
+          <p>Analizar la relación cuantitativa entre el nivel de conocimiento sobre ciberseguridad y la frecuencia de prácticas de prevención del phishing en estudiantes universitarios de la ciudad de Panamá.</p>
+        </div>
+        <div class="card">
+          <h3>Pregunta de investigación</h3>
+          <p>¿Qué relación estadísticamente significativa existe entre el nivel de conocimiento sobre ciberseguridad y las prácticas de prevención del phishing en los estudiantes universitarios de la ciudad de Panamá?</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Objetivos específicos</h3>
+        <ul>
+          <li>Determinar el nivel de conocimiento sobre ciberseguridad y phishing que poseen los estudiantes.</li>
+          <li>Identificar la frecuencia y tipo de prácticas de prevención que aplican en su vida digital cotidiana.</li>
+          <li>Establecer si existe una relación estadísticamente significativa entre conocimiento y prácticas.</li>
+          <li>Describir diferencias según sexo, carrera, semestre y experiencia previa de victimización.</li>
+        </ul>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Justificación</h3>
+          <p>Permitirá medir con datos precisos qué tanto saben los estudiantes sobre mensajes fraudulentos y qué acciones reales ejecutan. Aportará estadísticas institucionales para diseñar programas de alfabetización digital y prevención de delitos financieros en universidades panameñas.</p>
+        </div>
+        <div class="card">
+          <h3>Viabilidad</h3>
+          <p>Acceso a población estudiantil vía entornos digitales. Cuestionario en Google/Microsoft Forms (costo cero). Análisis con JASP/R o SPSS institucional. Recolección estimada 4–6 semanas. Anonimato garantizado.</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Deficiencias en el conocimiento del problema</h3>
+        <p>No existen bases de datos locales actualizadas en Panamá que correlacionen de forma numérica si una mayor instrucción teórica en ciberseguridad disminuye la tasa de éxito de los ataques de phishing en población universitaria. Falta evidencia correlacional y de predictores locales.</p>
+      </div>
+    </section>
+
+    <!-- DISEÑO -->
+    <section id="diseno">
+      <h2 class="section-title">Diseño metodológico</h2>
+      <div class="card">
+        <h3>Hipótesis</h3>
+        <p><strong>H1:</strong> Existe una relación positiva y estadísticamente significativa entre el nivel de conocimiento sobre ciberseguridad y la frecuencia de prácticas de prevención del phishing.</p>
+        <p style="margin-top:.5rem;"><strong>H0:</strong> No existe relación estadísticamente significativa entre ambas variables.</p>
+      </div>
+      <div class="card">
+        <h3>Variables principales</h3>
+        <div style="overflow-x:auto;">
+          <table class="budget-table" style="min-width:600px;">
+            <thead><tr><th>Variable</th><th>Tipo</th><th>Escala</th></tr></thead>
+            <tbody>
+              <tr><td>Nivel de conocimiento sobre ciberseguridad / phishing</td><td>Independiente</td><td>Ordinal / Intervalo</td></tr>
+              <tr><td>Frecuencia de prácticas de prevención</td><td>Dependiente</td><td>Ordinal (Likert)</td></tr>
+              <tr><td>Sexo, carrera, semestre, victimización previa</td><td>Control / sociodemográficas</td><td>Nominal / Ordinal</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Diseño</h3>
+          <p>Enfoque cuantitativo · Alcance descriptivo-correlacional · Diseño no experimental transversal. No se manipulan variables; se miden en un único momento temporal para describir niveles y grado de asociación.</p>
+        </div>
+        <div class="card">
+          <h3>Población y muestra</h3>
+          <p>Estudiantes universitarios activos de la ciudad de Panamá. Muestra estimada 350–400 (95 % confianza, 5 % error). Muestreo estratificado o por cuotas controlando sexo y área de estudio.</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Instrumento</h3>
+        <p>Cuestionario estructurado autoadministrado (Google Forms / Microsoft Forms): sociodemográficos, escala de conocimiento, escala de prácticas de prevención (Likert) y experiencia de victimización. Validación por juicio de expertos + prueba piloto (n≈30–40) y alfa de Cronbach ≥ 0,70.</p>
+      </div>
+    </section>
+
+    <!-- GANTT -->
+    <section id="gantt">
+      <h2 class="section-title">Cronograma Gantt (52 semanas)</h2>
+      <p style="color:var(--muted); margin-bottom:1rem; font-size:.95rem;">Fases secuenciales del proceso cuantitativo según Hernández-Sampieri (2014). Unidad de tiempo: semanas. Duración total: 1 año académico.</p>
+
+      <div class="metrics">
+        <div class="metric"><b>52</b><span>Semanas totales</span></div>
+        <div class="metric"><b>8</b><span>Semanas de campo</span></div>
+        <div class="metric"><b>18</b><span>Actividades</span></div>
+        <div class="metric"><b>7</b><span>Hitos clave</span></div>
+      </div>
+
+      <!-- Imagen Gantt externa -->
+      <div class="img-card">
+        <img src="https://oscidec.com/portafolio/meto.jpg" alt="Diagrama de Gantt – Cronograma de 52 semanas" loading="lazy"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div style="display:none; padding:2rem; text-align:center; color:var(--muted);">Imagen del Gantt no disponible temporalmente. Usa la tabla interactiva abajo.</div>
+        <div class="caption">
+          <span>Diagrama de Gantt · 52 semanas · Fases secuenciales</span>
+          <a href="https://oscidec.com/portafolio/meto.jpg" target="_blank" rel="noopener">Ver imagen completa ↗</a>
+        </div>
+      </div>
+
+      <div class="gantt-wrap">
+        <table class="gantt-table" id="gantt-table">
+          <thead><tr><th class="task">Actividad</th><th>S</th><th>E</th><th>D</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="gantt-legend">
+        <span><i style="background:var(--plan)"></i> Planificación / marco teórico</span>
+        <span><i style="background:var(--design)"></i> Diseño y validación</span>
+        <span><i style="background:var(--field)"></i> Trabajo de campo</span>
+        <span><i style="background:var(--analysis)"></i> Análisis e interpretación</span>
+        <span><i style="background:var(--close)"></i> Cierre e informe</span>
+      </div>
+
+      <div class="card" style="margin-top:1.5rem;">
+        <h3>Hitos principales</h3>
+        <ul>
+          <li><strong>S4</strong> — Planteamiento afinado y marco conceptual preliminar</li>
+          <li><strong>S12</strong> — Hipótesis y variables operacionales definidas</li>
+          <li><strong>S19</strong> — Instrumento validado y listo</li>
+          <li><strong>S28</strong> — Cierre de recolección de datos</li>
+          <li><strong>S40</strong> — Análisis estadístico concluido</li>
+          <li><strong>S48</strong> — Borrador completo del informe</li>
+          <li><strong>S52</strong> — Entrega final y divulgación</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- PRESUPUESTO -->
+    <section id="presupuesto">
+      <h2 class="section-title">Presupuesto de la investigación</h2>
+      <p style="color:var(--muted); margin-bottom:1rem; font-size:.95rem;">Elaborado siguiendo rubros habituales de convocatorias de apoyo a investigación de pregrado y formatos tipo SENACYT / universidades panameñas. Moneda: Balboas (B/.) = USD.</p>
+
+      <!-- Imagen presupuesto externa -->
+      <div class="img-card">
+        <img src="https://oscidec.com/portafolio/meto1.jpg" alt="Presupuesto de la investigación cuantitativa" loading="lazy"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div style="display:none; padding:2rem; text-align:center; color:var(--muted);">Imagen del presupuesto no disponible temporalmente. Usa la tabla abajo.</div>
+        <div class="caption">
+          <span>Presupuesto detallado · Total B/. 4.550,70</span>
+          <a href="https://oscidec.com/portafolio/meto1.jpg" target="_blank" rel="noopener">Ver imagen completa ↗</a>
+        </div>
+      </div>
+
+      <div class="card" style="overflow-x:auto;">
+        <table class="budget-table" id="budget-table">
+          <thead>
+            <tr><th>Rubro / Descripción</th><th class="num">Cant.</th><th>Unidad</th><th class="num">Unitario</th><th class="num">Total</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="share-bars" id="share-bars"></div>
+    </section>
+
+    <!-- DESCARGAS -->
+    <section id="descargas">
+      <h2 class="section-title">Descargas y recursos</h2>
+      <div class="download-box">
+        <div class="dl-card">
+          <div class="icon">📊</div>
+          <h4>Excel completo</h4>
+          <p>Planteamiento, Gantt, presupuesto y diseño metodológico</p>
+          <a class="btn" href="https://docs.google.com/spreadsheets/d/11aC0pZ65_r8KcZYeLiyfFb6S6xtN34QS/edit?usp=drive_link&ouid=106644594007973404773&rtpof=true&sd=true" target="_blank" rel="noopener">Abrir en Google Drive</a>
+        </div>
+        <div class="dl-card">
+          <div class="icon">🐙</div>
+          <h4>GitHub · Portafolio</h4>
+          <p>Repositorio con proyectos y trabajos de ciberseguridad</p>
+          <a class="btn" href="https://github.com/rafaelgonzalezm507-byte/portafolio" target="_blank" rel="noopener">Ver repositorio</a>
+        </div>
+        <div class="dl-card">
+          <div class="icon">💬</div>
+          <h4>WhatsApp</h4>
+          <p>Escríbeme para consultas sobre este trabajo</p>
+          <a class="btn" href="https://wa.me/50767600882" target="_blank" rel="noopener" style="background:var(--whatsapp);">+507 6760-0882</a>
+        </div>
+        <div class="dl-card">
+          <div class="icon">🖼</div>
+          <h4>Imágenes</h4>
+          <p>Gantt y presupuesto en alta resolución</p>
+          <a class="btn" href="https://oscidec.com/portafolio/meto.jpg" target="_blank" rel="noopener">Gantt</a>
+          &nbsp;
+          <a class="btn" href="https://oscidec.com/portafolio/meto1.jpg" target="_blank" rel="noopener">Presupuesto</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <h2 class="section-title">Preguntas frecuentes</h2>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">¿Por qué se eligió el enfoque cuantitativo y no cualitativo?</button>
+        <div class="faq-a">Porque el objetivo es medir la relación estadística entre conocimiento y prácticas de prevención, obtener porcentajes y correlaciones que fundamenten programas institucionales. El Módulo 3 ya desarrolló la versión cualitativa (fenomenológica) del mismo tema.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">¿Las fases del Gantt son realmente secuenciales?</button>
+        <div class="faq-a">Sí. Se respetó el principio de Hernández-Sampieri: en investigación cuantitativa las fases son secuenciales. Hay solapamientos mínimos y controlados, pero la lógica general es lineal: planteamiento → diseño → campo → análisis → informe.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">¿Por qué el presupuesto es relativamente bajo?</button>
+        <div class="faq-a">Es un proyecto de pregrado. Se priorizan herramientas gratuitas (Google Forms, JASP/R) y se evita personal a tiempo completo. El total de B/. 4.550,70 incluye 5 % de imprevistos y es compatible con apoyos institucionales o autofinanciamiento.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">¿Dónde está el Excel y cómo lo abro?</button>
+        <div class="faq-a">Está en Google Drive. Usa el enlace de la sección Descargas o de la barra lateral. También puedes descargar una copia local desde Drive (Archivo → Descargar → Microsoft Excel).</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">¿Cómo puedo contactar al autor?</button>
+        <div class="faq-a">Por WhatsApp al +507 6760-0882 o a través del repositorio de GitHub: github.com/rafaelgonzalezm507-byte/portafolio. También puedes usar el chatbot de esta página.</div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-grid">
+    <div>
+      <h4>Sobre este trabajo</h4>
+      <p>Módulo 4 – Diseño de investigación cuantitativa. Actividad 1: planteamiento del problema, cronograma Gantt de 52 semanas y presupuesto. Tema: phishing y prácticas de prevención en estudiantes universitarios de la ciudad de Panamá.</p>
+      <p style="margin-top:.6rem;"><strong>Enfoque:</strong> Cuantitativo · Descriptivo-correlacional · No experimental · Transversal</p>
+    </div>
+    <div>
+      <h4>Autor</h4>
+      <ul>
+        <li><strong>Rafael González</strong></li>
+        <li>Licenciatura en Ciberseguridad</li>
+        <li>Ciudad de Panamá, Panamá</li>
+        <li style="margin-top:.5rem;">WhatsApp: <a href="https://wa.me/50767600882" target="_blank" rel="noopener">+507 6760-0882</a></li>
+      </ul>
+      <div class="footer-social">
+        <a class="wa" href="https://wa.me/50767600882" target="_blank" rel="noopener">✆ WhatsApp</a>
+        <a href="https://github.com/rafaelgonzalezm507-byte/portafolio" target="_blank" rel="noopener">🐙 GitHub</a>
+      </div>
+    </div>
+    <div>
+      <h4>Recursos</h4>
+      <ul>
+        <li><a href="https://docs.google.com/spreadsheets/d/11aC0pZ65_r8KcZYeLiyfFb6S6xtN34QS/edit?usp=drive_link&ouid=106644594007973404773&rtpof=true&sd=true" target="_blank" rel="noopener">Excel en Google Drive</a></li>
+        <li><a href="https://oscidec.com/portafolio/meto.jpg" target="_blank" rel="noopener">Imagen Gantt</a></li>
+        <li><a href="https://oscidec.com/portafolio/meto1.jpg" target="_blank" rel="noopener">Imagen Presupuesto</a></li>
+        <li><a href="https://github.com/rafaelgonzalezm507-byte/portafolio" target="_blank" rel="noopener">Repositorio GitHub</a></li>
+        <li><a href="#gantt">Cronograma interactivo</a></li>
+        <li><a href="#presupuesto">Tabla de presupuesto</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Referencias metodológicas</h4>
+      <ul>
+        <li>Hernández-Sampieri, R. (2014). <em>Metodología de la investigación</em>.</li>
+        <li>Fases secuenciales del proceso cuantitativo</li>
+        <li>Diseño no experimental transversal</li>
+        <li>Formatos de presupuesto tipo SENACYT / universidades</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p><strong>Rafael González</strong> · Licenciatura en Ciberseguridad · Módulo 4 – Diseño de investigación cuantitativa</p>
+    <p style="margin-top:.35rem;">Actividad 1 · Planteamiento + Gantt 52 semanas + Presupuesto · Phishing en universitarios · Ciudad de Panamá</p>
+    <p style="margin-top:.5rem;">© 2026 · Documento académico · Contacto: <a href="https://wa.me/50767600882">+507 6760-0882</a> · <a href="https://github.com/rafaelgonzalezm507-byte/portafolio">GitHub</a></p>
+  </div>
+</footer>
+
+<!-- 3D -->
+<div id="three-container" title="Etiqueta 3D – Módulo 4"></div>
+
+<!-- CHATBOT -->
+<button class="chat-fab" id="chat-fab" aria-label="Abrir chat">💬</button>
+<div class="chat" id="chat" role="dialog" aria-label="Asistente del módulo">
+  <div class="chat-header">
+    <span>Asistente Módulo 4</span>
+    <button id="chat-close" aria-label="Cerrar">✕</button>
+  </div>
+  <div class="chat-body" id="chat-body">
+    <div class="msg bot">¡Hola! Soy el asistente de este trabajo de Rafael González. Pregúntame por el objetivo, el Gantt, el presupuesto, la muestra, WhatsApp o GitHub.</div>
+  </div>
+  <div class="chat-chips">
+    <button class="chip" data-q="objetivo">Objetivo</button>
+    <button class="chip" data-q="gantt">Cronograma</button>
+    <button class="chip" data-q="presupuesto">Presupuesto</button>
+    <button class="chip" data-q="contacto">Contacto</button>
+  </div>
+  <form class="chat-form" id="chat-form">
+    <input type="text" id="chat-input" placeholder="Escribe tu pregunta…" autocomplete="off">
+    <button type="submit">Enviar</button>
+  </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const GANTT = [
+  { n: '1. Revisión y ajuste del planteamiento', s: 1, e: 4, c: 'plan' },
+  { n: '2. Revisión de literatura y marco teórico', s: 3, e: 10, c: 'plan' },
+  { n: '3. Hipótesis y definición operacional de variables', s: 8, e: 12, c: 'plan' },
+  { n: '4. Diseño del instrumento y protocolo', s: 10, e: 14, c: 'design' },
+  { n: '5. Validación por juicio de expertos', s: 13, e: 16, c: 'design' },
+  { n: '6. Prueba piloto y confiabilidad (α)', s: 15, e: 18, c: 'design' },
+  { n: '7. Ajustes finales del instrumento', s: 17, e: 19, c: 'design' },
+  { n: '8. Autorizaciones y consentimiento informado', s: 16, e: 20, c: 'design' },
+  { n: '9. Selección de muestra y plan de difusión', s: 19, e: 22, c: 'field' },
+  { n: '10. Recolección de datos (cuestionario)', s: 21, e: 28, c: 'field' },
+  { n: '11. Monitoreo de tasa de respuesta', s: 22, e: 28, c: 'field' },
+  { n: '12. Limpieza y construcción de base de datos', s: 27, e: 32, c: 'analysis' },
+  { n: '13. Análisis estadístico descriptivo', s: 30, e: 35, c: 'analysis' },
+  { n: '14. Análisis inferencial (correlación / contrastes)', s: 33, e: 40, c: 'analysis' },
+  { n: '15. Interpretación y discusión de resultados', s: 38, e: 44, c: 'analysis' },
+  { n: '16. Redacción del informe (borrador)', s: 40, e: 48, c: 'close' },
+  { n: '17. Revisión y versión final del informe', s: 46, e: 50, c: 'close' },
+  { n: '18. Presentación y divulgación', s: 49, e: 52, c: 'close' }
+];
+
+const BUDGET = [
+  { g: 'A. Talento humano', items: [
+    ['Investigador principal (dedicación parcial)', 12, 'meses', 250],
+    ['Asistente de apoyo (difusión y limpieza de datos)', 40, 'horas', 6],
+    ['Juicio de expertos (validación del instrumento)', 2, 'expertos', 75]
+  ]},
+  { g: 'B. Equipos y almacenamiento', items: [
+    ['Disco duro externo / almacenamiento cifrado', 1, 'unidad', 85],
+    ['Amortización de laptop/PC personal', 1, 'proyecto', 120]
+  ]},
+  { g: 'C. Software y servicios digitales', items: [
+    ['Licencia SPSS / alternativa libre (JASP-R)', 1, 'licencia', 0],
+    ['Google / Microsoft Forms (institucional)', 1, 'cuenta', 0],
+    ['Plataforma de encuesta premium (opcional)', 1, 'mes', 40]
+  ]},
+  { g: 'D. Materiales y suministros', items: [
+    ['Papelería y materiales de difusión', 1, 'lote', 80],
+    ['Afiches / códigos QR para campus', 30, 'unidades', 2.5]
+  ]},
+  { g: 'E. Viajes y trabajo de campo', items: [
+    ['Transporte y viáticos (visitas a facultades)', 12, 'visitas', 18],
+    ['Incentivos simbólicos a participantes del piloto', 40, 'participantes', 3]
+  ]},
+  { g: 'F. Difusión de resultados', items: [
+    ['Impresión y encuadernación del informe final', 4, 'ejemplares', 22],
+    ['Inscripción a evento académico / publicación', 1, 'cuota', 120]
+  ]}
+];
+const IMPREV = 0.05;
+function money(n) { return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+
+function renderGantt() {
+  const thead = document.querySelector('#gantt-table thead tr');
+  const tbody = document.querySelector('#gantt-table tbody');
+  for (let w = 1; w <= 52; w++) {
+    const th = document.createElement('th');
+    th.className = 'wk' + (w % 13 === 0 ? ' q' : '');
+    th.textContent = w;
+    thead.appendChild(th);
+  }
+  GANTT.forEach(r => {
+    const tr = document.createElement('tr');
+    const dur = r.e - r.s + 1;
+    tr.innerHTML = `<td class="task">${r.n}<br><small style="opacity:.7">S${r.s}–S${r.e} · ${dur} sem.</small></td>
+      <td>${r.s}</td><td>${r.e}</td><td><strong>${dur}</strong></td>`;
+    for (let w = 1; w <= 52; w++) {
+      const td = document.createElement('td');
+      if (w >= r.s && w <= r.e) td.innerHTML = `<div class="bar bar-${r.c}" title="${r.n}: S${r.s}–S${r.e}"></div>`;
+      if (w % 13 === 0) td.style.background = 'var(--surface2)';
+      tr.appendChild(td);
+    }
+    tbody.appendChild(tr);
+  });
+}
+
+function renderBudget() {
+  const tbody = document.querySelector('#budget-table tbody');
+  let html = '', subtotal = 0;
+  const groups = [];
+  BUDGET.forEach(g => {
+    html += `<tr><td class="grp" colspan="5">${g.g}</td></tr>`;
+    let gSum = 0;
+    g.items.forEach(it => {
+      const tot = it[1] * it[3];
+      gSum += tot;
+      html += `<tr><td>${it[0]}</td><td class="num">${it[1]}</td><td>${it[2]}</td><td class="num">${money(it[3])}</td><td class="num">${money(tot)}</td></tr>`;
+    });
+    html += `<tr><td class="sub" colspan="4">Subtotal ${g.g.split('. ')[1] || g.g}</td><td class="sub num">${money(gSum)}</td></tr>`;
+    groups.push({ name: g.g, val: gSum });
+    subtotal += gSum;
+  });
+  const imprev = Math.round(subtotal * IMPREV * 100) / 100;
+  const total = subtotal + imprev;
+  html += `<tr><td class="sub" colspan="4">SUBTOTAL DIRECTO</td><td class="sub num">${money(subtotal)}</td></tr>`;
+  html += `<tr><td class="sub" colspan="4">G. Imprevistos (5 %)</td><td class="sub num">${money(imprev)}</td></tr>`;
+  html += `<tr class="total"><td colspan="4" style="text-align:right">TOTAL PRESUPUESTO DEL PROYECTO</td><td class="num">B/. ${money(total)}</td></tr>`;
+  tbody.innerHTML = html;
+
+  const share = document.getElementById('share-bars');
+  let shtml = '';
+  const colors = ['var(--plan)', 'var(--design)', 'var(--field)', 'var(--analysis)', 'var(--close)', 'var(--accent)'];
+  groups.forEach((g, i) => {
+    const pct = total ? Math.round(g.val / total * 1000) / 10 : 0;
+    shtml += `<div class="bar-row"><div class="bar-label"><span>${g.name}</span><span>B/. ${money(g.val)} · ${pct} %</span></div>
+      <div class="bar-bg"><div class="bar-fill" data-w="${pct}" style="--w:${pct}%;background:${colors[i % colors.length]}"></div></div></div>`;
+  });
+  const ip = Math.round(imprev / total * 1000) / 10;
+  shtml += `<div class="bar-row"><div class="bar-label"><span>G. Imprevistos</span><span>B/. ${money(imprev)} · ${ip} %</span></div>
+    <div class="bar-bg"><div class="bar-fill" data-w="${ip}" style="--w:${ip}%;background:var(--muted)"></div></div></div>`;
+  share.innerHTML = shtml;
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.bar-fill').forEach(el => { el.style.width = el.getAttribute('data-w') + '%'; });
+  });
+}
+
+/* FAQ */
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const open = !item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    });
+    if (open) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+  });
+});
+
+/* THEME */
+document.getElementById('theme-btn').addEventListener('click', () => {
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('m4-theme', next); } catch (e) {}
+});
+
+/* MENU */
+const sidebar = document.getElementById('sidebar');
+const backdrop = document.getElementById('backdrop');
+const menuBtn = document.getElementById('menu-btn');
+function toggleMenu(open) {
+  sidebar.classList.toggle('open', open);
+  backdrop.classList.toggle('show', open);
+  menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+menuBtn.addEventListener('click', () => toggleMenu(!sidebar.classList.contains('open')));
+backdrop.addEventListener('click', () => toggleMenu(false));
+document.querySelectorAll('.sidebar-nav a').forEach(a => {
+  a.addEventListener('click', () => { if (window.innerWidth <= 992) toggleMenu(false); });
+});
+
+/* ACTIVE NAV + PROGRESS */
+const navLinks = Array.from(document.querySelectorAll('.sidebar-nav a[href^="#"]'));
+const secs = navLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+const progress = document.getElementById('progress');
+function onScroll() {
+  const y = window.pageYOffset || document.documentElement.scrollTop;
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  progress.style.width = (h > 0 ? y / h * 100 : 0) + '%';
+  let cur = secs[0] ? secs[0].id : '';
+  secs.forEach(s => { if (s.getBoundingClientRect().top <= 120) cur = s.id; });
+  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+document.getElementById('print-btn').addEventListener('click', () => window.print());
+
+/* CHATBOT */
+const chat = document.getElementById('chat');
+const chatBody = document.getElementById('chat-body');
+const chatInput = document.getElementById('chat-input');
+document.getElementById('chat-fab').addEventListener('click', () => {
+  chat.classList.toggle('open');
+  if (chat.classList.contains('open')) chatInput.focus();
+});
+document.getElementById('chat-close').addEventListener('click', () => chat.classList.remove('open'));
+
+function addMsg(who, text) {
+  const d = document.createElement('div');
+  d.className = 'msg ' + who;
+  d.textContent = text;
+  chatBody.appendChild(d);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+const KB = {
+  objetivo: 'Objetivo general: analizar la relación cuantitativa entre el nivel de conocimiento sobre ciberseguridad y la frecuencia de prácticas de prevención del phishing en estudiantes universitarios de la ciudad de Panamá.',
+  gantt: 'El cronograma abarca 52 semanas (1 año académico) con 18 actividades secuenciales. El trabajo de campo va de la semana 21 a la 28. El informe final se presenta entre las semanas 49 y 52.',
+  presupuesto: 'Presupuesto total: B/. 4.550,70 (incluye 5 % de imprevistos). El rubro mayor es Talento humano (B/. 3.390). Se priorizan herramientas libres (JASP/R, Google Forms).',
+  contacto: 'WhatsApp: +507 6760-0882. GitHub: github.com/rafaelgonzalezm507-byte/portafolio. Excel en Google Drive (enlace en la sección Descargas).',
+  muestra: 'Muestra estimada: 350–400 estudiantes universitarios de la ciudad de Panamá. Muestreo estratificado o por cuotas.',
+  hipotesis: 'H1: existe relación positiva y significativa entre conocimiento y prácticas de prevención. H0: no existe relación significativa.',
+  excel: 'El Excel completo está en Google Drive. Busca el enlace en la barra lateral o en la sección Descargas de esta página.'
+};
+
+function botReply(txt) {
+  const s = txt.toLowerCase();
+  if (/hola|buenas|saludos/.test(s)) return '¡Hola! ¿En qué te ayudo? Puedes preguntar por objetivo, Gantt, presupuesto, muestra, hipótesis, Excel, WhatsApp o GitHub.';
+  if (/objetivo|prop[óo]sito/.test(s)) return KB.objetivo;
+  if (/gantt|cronograma|semana|tiempo|dura/.test(s)) return KB.gantt;
+  if (/presupuesto|costo|cu[áa]nto|dinero|b\/|total/.test(s)) return KB.presupuesto;
+  if (/whatsapp|contacto|celular|tel[eé]fono|escribir|llamar/.test(s)) return KB.contacto;
+  if (/muestra|participante|estudiantes|n\s*=/.test(s)) return KB.muestra;
+  if (/hip[óo]tesis|h1|h0/.test(s)) return KB.hipotesis;
+  if (/excel|drive|descarga|archivo|spreadsheet/.test(s)) return KB.excel;
+  if (/github|repositorio|portafolio|repo/.test(s)) return 'Repositorio de GitHub de Rafael González: https://github.com/rafaelgonzalezm507-byte/portafolio';
+  return 'Este trabajo es de Rafael González (Ciberseguridad). Pregunta por: objetivo, Gantt, presupuesto, muestra, hipótesis, Excel, WhatsApp o GitHub.';
+}
+
+function sendMsg(t) {
+  t = (t || '').trim();
+  if (!t) return;
+  addMsg('user', t);
+  setTimeout(() => addMsg('bot', botReply(t)), 400);
+}
+document.getElementById('chat-form').addEventListener('submit', e => {
+  e.preventDefault();
+  sendMsg(chatInput.value);
+  chatInput.value = '';
+});
+document.querySelectorAll('.chip').forEach(c => {
+  c.addEventListener('click', () => sendMsg(c.getAttribute('data-q')));
+});
+
+/* THREE.JS */
+(function () {
+  const container = document.getElementById('three-container');
+  if (!window.THREE) return;
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+  camera.position.z = 4.2;
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setSize(140, 140);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  container.appendChild(renderer.domElement);
+  const geo = new THREE.BoxGeometry(1.4, 1.4, 1.4);
+  const mat = new THREE.MeshStandardMaterial({ color: 0x2e75b6, metalness: 0.3, roughness: 0.5, transparent: true, opacity: 0.85 });
+  const cube = new THREE.Mesh(geo, mat);
+  scene.add(cube);
+  cube.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo), new THREE.LineBasicMaterial({ color: 0x0d9488 })));
+  const colors = [0x70ad47, 0xed7d31, 0x7030a0, 0xc00000];
+  const spheres = [];
+  colors.forEach((c, i) => {
+    const s = new THREE.Mesh(new THREE.SphereGeometry(0.18, 16, 16), new THREE.MeshStandardMaterial({ color: c, metalness: 0.4, roughness: 0.4 }));
+    const a = (i / colors.length) * Math.PI * 2;
+    s.position.set(Math.cos(a) * 1.7, Math.sin(a) * 1.1, Math.sin(a * 1.5) * 0.6);
+    scene.add(s);
+    spheres.push({ mesh: s, angle: a, speed: 0.4 + i * 0.1 });
+  });
+  scene.add(new THREE.DirectionalLight(0xffffff, 1.1).translateX(3).translateY(4).translateZ(5));
+  scene.add(new THREE.AmbientLight(0x6688aa, 0.55));
+  let t = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    t += 0.012;
+    cube.rotation.x = t * 0.35;
+    cube.rotation.y = t * 0.5;
+    spheres.forEach((o, i) => {
+      o.angle += 0.008 * o.speed;
+      o.mesh.position.x = Math.cos(o.angle) * 1.7;
+      o.mesh.position.y = Math.sin(o.angle) * 1.1 + Math.sin(t + i) * 0.15;
+      o.mesh.position.z = Math.sin(o.angle * 1.5) * 0.6;
+    });
+    renderer.render(scene, camera);
+  }
+  animate();
+  window.addEventListener('resize', () => { const w = container.clientWidth; renderer.setSize(w, w); });
+})();
+
+/* HERO PARTICLES */
+(function () {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let w, h, particles = [];
+  function resize() { w = canvas.width = canvas.offsetWidth; h = canvas.height = canvas.offsetHeight; }
+  function init() {
+    particles = [];
+    for (let i = 0; i < 60; i++) {
+      particles.push({ x: Math.random() * w, y: Math.random() * h, r: 1 + Math.random() * 2.5, vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4, a: 0.2 + Math.random() * 0.5 });
+    }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > w) p.vx *= -1;
+      if (p.y < 0 || p.y > h) p.vy *= -1;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${p.a})`; ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize', () => { resize(); init(); });
+  resize(); init(); draw();
+})();
+
+renderGantt();
+renderBudget();
+</script>
+</body>
+</html>
